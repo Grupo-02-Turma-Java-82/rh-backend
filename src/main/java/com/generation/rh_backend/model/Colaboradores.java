@@ -25,7 +25,15 @@ public class Colaboradores {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long Id;
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
 
 	@NotBlank(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
