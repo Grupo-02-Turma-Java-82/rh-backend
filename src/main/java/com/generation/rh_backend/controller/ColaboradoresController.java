@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.blogpessoal.model.Tema;
 import com.generation.rh_backend.model.Colaboradores;
 import com.generation.rh_backend.repository.ColaboradoresRepository;
 import java.util.Optional;
