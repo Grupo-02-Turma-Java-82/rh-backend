@@ -20,6 +20,12 @@ public class ColaboradoresService {
   public List<Colaboradores> getAll() {
     return colaboradoresRepository.findAll();
   }
+  
+  public Colaboradores getById(Long id) {
+      return colaboradoresRepository.findById(id)
+         .orElseThrow(
+        	() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Colaborador não encontrado com o ID: " + id));
+  }
 
   public List<Colaboradores> getByNome(String nome) {
     return colaboradoresRepository.findAllByNomeContainingIgnoreCase(nome);
