@@ -2,7 +2,9 @@ package com.generation.rh_backend.controller;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.generation.blogpessoal.model.Tema;
 import com.generation.rh_backend.model.Colaboradores;
 import com.generation.rh_backend.repository.ColaboradoresRepository;
 import java.util.Optional;
@@ -10,12 +12,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
@@ -57,4 +53,17 @@ public class ColaboradoresController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(colaboradoresRepository.save(colaborador));
     }
+    
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long id) {
+		
+		Optional<Colaboradores> colaborador = colaboradoresRepository.findById(id);
+		
+		if(colaborador.isEmpty())
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		
+		colaboradoresRepository.deleteById(id);
+		
+	}
 }
