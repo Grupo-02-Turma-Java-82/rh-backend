@@ -40,7 +40,7 @@ public class ColaboradoresService {
   }
 
   public Colaboradores create(Colaboradores colaboradores) {
-    this.colaboradoresRepository.findById(colaboradores.getId()).ifPresent(colaboradorExistente -> {
+    this.colaboradoresRepository.findAllByEmailContainingIgnoreCase(colaboradores.getEmail()).ifPresent(colaboradorExistente -> {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Colaborador já existente!");
     });
 
