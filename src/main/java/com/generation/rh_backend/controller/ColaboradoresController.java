@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/colaboradores")
@@ -23,13 +25,13 @@ public class ColaboradoresController {
     @Autowired
     private ColaboradoresRepository colaboradoresRepository;
 
-    //lsitar todos os colaboradores
+    // lsitar todos os colaboradores
     @GetMapping
     public ResponseEntity<List<Colaboradores>> getAll() {
         return ResponseEntity.ok(colaboradoresRepository.findAll());
     }
 
-    //buscar por ID
+    // buscar por ID
     @GetMapping("/{id}")
     public ResponseEntity<Colaboradores> getById(@PathVariable Long id) {
         return colaboradoresRepository.findById(id)
@@ -37,14 +39,14 @@ public class ColaboradoresController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    //criar novo colaborador
+    // criar novo colaborador
     @PostMapping
     public ResponseEntity<Colaboradores> post(@Valid @RequestBody Colaboradores colaborador) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(colaboradoresRepository.save(colaborador));
     }
 
-    //colaborador existente
+    // colaborador existente
     @PutMapping
     public ResponseEntity<Colaboradores> put(@Valid @RequestBody Colaboradores colaborador) {
         if (colaborador.getId() == null || !colaboradoresRepository.existsById(colaborador.getId()))

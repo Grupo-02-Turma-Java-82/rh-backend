@@ -23,9 +23,6 @@ public class Colaboradores {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @NotBlank(message = "O Atributo Nome é Obrigatório!")
-    private String nome;
-
     @NotBlank(message = "O Atributo Email é Obrigatório!")
     @Email(message = "O Atributo deve ser um email válido!")
     private String email;
@@ -86,4 +83,5 @@ public class Colaboradores {
     public void setLinkCurriculo(String linkCurriculo) {
         this.linkCurriculo = linkCurriculo;
     }
+
 }
