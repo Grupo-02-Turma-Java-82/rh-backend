@@ -1,16 +1,16 @@
 package com.generation.rh_backend.model;
 
-import java.util.List;
+//import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
+//import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+//import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+//import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -30,14 +30,10 @@ public class Colaboradores {
 	@NotBlank(message = "O Atributo Email é Obrigatório!")
 	@Email(message = "O Atributo deve ser um email válido!")
 	private String email;
-	
+
 	@NotBlank(message = "O Atributo Telefone é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String telefone;
-
-	@NotBlank(message = "O Atributo Senha é Obrigatório!")
-	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
-	private String senha;
 
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
@@ -60,13 +56,29 @@ public class Colaboradores {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getSenha() {
-		return this.senha;
+	
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getLinkCurriculo() {
+		return linkCurriculo;
+	}
+
+	public void setLinkCurriculo(String linkCurriculo) {
+		this.linkCurriculo = linkCurriculo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getFoto() {
