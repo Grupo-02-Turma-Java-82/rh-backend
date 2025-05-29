@@ -16,8 +16,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import lombok.Data;
+
+@Data
 @Entity
-@Table(name = "tb_usuarios")
+@Table(name = "tb_colaboradores")
 public class Colaboradores {
 
 	@Id
@@ -41,51 +44,4 @@ public class Colaboradores {
 	@Size(max = 5000, message = "O link do curriculo não pode ser maior do que 5000 caracteres")
 	private String linkCurriculo;
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getLinkCurriculo() {
-		return linkCurriculo;
-	}
-
-	public void setLinkCurriculo(String linkCurriculo) {
-		this.linkCurriculo = linkCurriculo;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getFoto() {
-		return this.foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
 }
