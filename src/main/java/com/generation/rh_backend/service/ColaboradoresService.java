@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.generation.rh_backend.dto.ColaboradorCreateBodyDTO;
 import com.generation.rh_backend.model.Colaboradores;
 import com.generation.rh_backend.repository.ColaboradoresRepository;
 
@@ -19,6 +20,12 @@ public class ColaboradoresService {
 
   public List<Colaboradores> getAll() {
     return colaboradoresRepository.findAll();
+  }
+
+  public Colaboradores getById(Long id) {
+    return colaboradoresRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Colaborador não encontrado com o ID: " + id));
   }
 
   public List<Colaboradores> getByNome(String nome) {
@@ -33,12 +40,33 @@ public class ColaboradoresService {
     return colaboradoresRepository.findAllByTelefoneContainingIgnoreCase(telefone);
   }
 
-  public Colaboradores create(Colaboradores colaboradores) {
-    this.colaboradoresRepository.findById(colaboradores.getId()).ifPresent(colaboradorExistente -> {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Colaborador já existente!");
-    });
+  public Colaboradores create(ColaboradorCreateBodyDTO colaboradorDTO) {
 
-    return colaboradoresRepository.save(colaboradores);
+    Colaboradores novoColaborador = new Colaboradores();
+
+    novoColaborador.setNome(colaboradorDTO.getNome());
+    novoColaborador.setEmail(colaboradorDTO.getEmail());
+    novoColaborador.setTelefone(colaboradorDTO.getTelefone());
+    novoColaborador.setFoto(colaboradorDTO.getFoto());
+    novoColaborador.setLinkCurriculo(colaboradorDTO.getLinkCurriculo());
+
+    if (novoColaborador.getEmail() != null) {
+      colaboradoresRepository.findAllByEmailContainingIgnoreCase(novoColaborador.getEmail())
+          .ifPresent(colaboradorExistente -> {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "O email '" + novoColaborador.getEmail() + "' já está cadastrado.");
+          });
+    }
+
+    if (novoColaborador.getTelefone() != null) {
+      colaboradoresRepository.findAllByTelefoneContainingIgnoreCase(novoColaborador.getTelefone())
+          .ifPresent(colaboradorExistente -> {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "O telefone '" + novoColaborador.getTelefone() + "' já está cadastrado.");
+          });
+    }
+
+    return colaboradoresRepository.save(novoColaborador);
   }
 
   public Colaboradores update(Long id, Colaboradores colaboradoresPayload) {
