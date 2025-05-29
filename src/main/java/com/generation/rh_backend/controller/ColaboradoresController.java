@@ -39,6 +39,7 @@ public class ColaboradoresController {
 		return colaboradoresRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
+	
 	// buscar por nome
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Colaboradores>> getByNome(@PathVariable String nome) {
