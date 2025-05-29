@@ -1,12 +1,8 @@
 package com.generation.rh_backend.model;
 
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,30 +14,31 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "tb_colaboradores")
 public class Colaboradores {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Schema(description = "ID do Colaborador", accessMode = Schema.AccessMode.READ_ONLY)
+	private Long Id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+	@NotBlank(message = "O Atributo Nome é Obrigatório!")
+	@Schema(description = "Nome completo do colaborador. É obrigatório.", example = "João da Silva", requiredMode = Schema.RequiredMode.REQUIRED)
+	private String nome;
 
-    @NotBlank(message = "O Atributo Nome é Obrigatório!")
-    private String nome;
+	@NotBlank(message = "O Atributo Email é Obrigatório!")
+	@Email(message = "O Atributo deve ser um email válido!")
+	@Schema(description = "Endereço de e-mail do colaborador. Deve ser um email válido e é obrigatório.", example = "joao.silva@example.com", requiredMode = Schema.RequiredMode.REQUIRED, format = "email")
+	private String email;
 
-    @NotBlank(message = "O Atributo Email é Obrigatório!")
-    @Email(message = "O Atributo deve ser um email válido!")
-    private String email;
+	@NotBlank(message = "O Atributo Telefone é Obrigatório!")
+	@Schema(description = "Contato telefônico do colaborador. É obrigatório.", example = "+55 (19) 98743-7649", requiredMode = Schema.RequiredMode.REQUIRED)
+	private String telefone;
 
-    @NotBlank(message = "O Atributo Telefone é Obrigatório!")
-    private String telefone;
+	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
+	@Schema(description = "URL para a foto do colaborador. O link não pode exceder 5000 caracteres.", example = "https://example.com/foto_joao.jpg", maxLength = 5000)
+	private String foto;
 
-    @Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
-    private String foto;
-    
-    @Size(max = 5000, message = "O link do curriculo não pode ser maior do que 5000 caracteres")
-    private String linkCurriculo;
-
-    public Long getId() {
-        return Id;
-    }
+	@Size(max = 5000, message = "O link do curriculo não pode ser maior do que 5000 caracteres")
+	@Schema(description = "URL para o currículo do colaborador. O link não pode exceder 5000 caracteres.", example = "https://example.com/curriculo_joao.pdf", maxLength = 5000)
+	private String linkCurriculo;
 
     public void setId(Long id) {
         Id = id;
