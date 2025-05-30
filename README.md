@@ -24,6 +24,7 @@
 
 ## 1. Descrição
 
+
 O **Sistema de Cadastro de RH**, Talentys, é uma aplicação backend desenvolvida para gerenciar os principais processos da área de Recursos Humanos, oferecendo funcionalidades como cadastro de colaboradores, recrutamento e seleção, controle de ponto, folha de pagamento e programas de desenvolvimento e treinamento.
 
 ------
